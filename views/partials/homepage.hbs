@@ -1,0 +1,27 @@
+<div id="navbar">
+  <a href="#default" id="logo">Sound View</a>
+  <div id="navbar-right">
+    <a class="active" href="#home">Home</a>
+    <a href="/test">SignUp</a>
+    <a href="#about">LogIn</a>
+  </div>
+</div>
+
+<div style="margin-top:275px;margin-bottom:25px" >
+  <img src="localhost:3000/img/octopus.png">
+</div>
+
+<script>
+// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+  document.getElementById("navbar").style.padding = "30px 10px";
+  document.getElementById("logo").style.fontSize = "25px";
+} else {
+  document.getElementById("navbar").style.padding = "80px 10px";
+  document.getElementById("logo").style.fontSize = "35px";
+}
+}
+</script>
