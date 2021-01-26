@@ -8,10 +8,14 @@ const port = 3000;
 var input = require('./my_modules/getinput.js');
 var info = require('./my_modules/info.js');
 
+//fetch
+const fetch = require('node-fetch');
+
 //Loads the handlebars module
 const handlebars = require('express-handlebars');
 
 var bodyParser = require('body-parser');
+
 //var jsonParser = bodyParser.json();
 //var urlencodedParser = bodyParser.urlencoded({extended:false});
 
@@ -35,11 +39,21 @@ app.use(bodyParser.json());
 //Serves static files (we need this to import a css file)
 app.use(express.static('public'));
 
-
+//remember to read about async
+async function getQuote(){
+      const rand = Math.floor(Math.random()*10);
+      const res = await fetch('https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand',{method:"GET"});
+      const json=await res.json();
+      return json[rand].content.rendered;
+   }
 //Routes
 app.get('/', (req, res) =>{
   //serves the body of page or mainhandlebars to container aka indexhandlebars
-  res.render('main',{layout : 'index'});
+  getQuote().then(quote=>{
+    quote= quote.replace("<p>","");
+    quote= quote.replace("</p>","");
+    res.render('main',{layout : 'index',quote});
+  });
 });
 
 app.post('/',(req, res) =>{
@@ -48,18 +62,20 @@ app.post('/',(req, res) =>{
   var lname =input.get_full(req.body.name)[1];
   var email =input.get_value(req.body.email);
   var phone =input.get_value(req.body.phone);
-
   console.log(phone);
-
  res.render('main',{layout: 'index'});
 });
 
 //Route
-app.get('/test', (req, res) =>{
+app.get('/signin', (req, res) =>{
   //serves the body of page or mainhandlebars to container aka indexhandlebars
-  console.log("Got it!")
-  res.render('planB',{layout : 'index'});
+console.log(getQuote());
+  res.render('planB',{layout : 'index', quote:getQuote()});
 });
+
+
+
+
 app.post('/test', (req, res) =>{
   //serves the body of page or mainhandlebars to container aka indexhandlebars
   console.log("Got it!")
