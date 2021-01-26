@@ -3,13 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>My Awesome App</title>
+    <title>e pluribus unum</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="stylesheet" type="text/css" href="./style.css" />
+    <style>
+      .inp
+      {
+        display:block;
+      }
+      body{background-color: lightblue};
+    </style>
   </head>
   <body>
     <h1>This is the plan B page</h1>
     {{!-- We could use the same body as the index.hbs page --}}
     {{!-- using the {{{body}}}, you remember it right ?--}}
+    <fieldset style="width:45%; border:outset gold 1%">
+        <form method="post" action="/login" style="margin-left:1%;margin-right:1%;margin-top:1%;margin-bottom:1%">
+          <label>Full Name:</label>
+          <input class="inp" type="text" name="fname"></br>
+          <label>Password:</label>
+          <input class="inp" type="password" name="pass"></br>
+          <label>Email:</label>
+          <input class="inp" type="text" name="email"></br>
+          <label>Phone:</label>
+          <input class="inp" type="text" name="phone">
+          <button style="border:outset 2px gold;width:60px;hieght:15px;background-color:pink;color:green">Submit</button>
+        </form>
+        <div style="float:right">
+          <image src="/img/mandala.png" style="align-self: inherit;width:50%;hieght:50%;float:right">
+        </div>
+    </fieldset>
   </body>
 </html>

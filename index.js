@@ -46,6 +46,10 @@ async function getQuote(){
       const json=await res.json();
       return json[rand].content.rendered;
    }
+
+
+
+
 //Routes
 app.get('/', (req, res) =>{
   //serves the body of page or mainhandlebars to container aka indexhandlebars
@@ -55,30 +59,23 @@ app.get('/', (req, res) =>{
     res.render('main',{layout : 'index',quote});
   });
 });
-
-app.post('/',(req, res) =>{
+app.post('/login',(req, res) =>{
   //serves the body of page or mainhandlebars to container aka indexhandlebars
-  var fname =input.get_full(req.body.name)[0];
-  var lname =input.get_full(req.body.name)[1];
-  var email =input.get_value(req.body.email);
-  var phone =input.get_value(req.body.phone);
-  console.log(phone);
- res.render('main',{layout: 'index'});
+  var str = input.get_full(req.body.name);
+  console.log(str);
+    res.render('planB',{layout:'index'});
 });
+
 
 //Route
-app.get('/signin', (req, res) =>{
+app.get('/login', (req, res) =>{
   //serves the body of page or mainhandlebars to container aka indexhandlebars
-console.log(getQuote());
-  res.render('planB',{layout : 'index', quote:getQuote()});
+
+  res.render('planB',{layout : 'index'});
 });
-
-
-
 
 app.post('/test', (req, res) =>{
   //serves the body of page or mainhandlebars to container aka indexhandlebars
-  console.log("Got it!")
   res.render('planB',{layout : 'index'});
 });
 
