@@ -73,6 +73,16 @@ app.post('/login',(req, res) =>{
     res.render('planB',{layout: 'index',getWelcome});
 });
 
+app.get('/newest',(req,res)=>{
+  var t = Date();
+  res.render('main',{layout:'index',t});
+});
+
+app.get('/time',(req,res)=>{
+  res.render('planB',{layout:'index'});
+});
+
+
 //Route
 app.get('/build', (req,res)=>{
   res.render('partials/partial2',{layout: 'index'});
