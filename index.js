@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 /*CUSTOM Modules
 */
-var input = require('./my_modules/getinput.js');
+var input = require('./my_modules/utilities/getinput.js');
 var info = require('./my_modules/info.js');
 
 //fetch
@@ -16,8 +16,8 @@ const handlebars = require('express-handlebars');
 
 var bodyParser = require('body-parser');
 
-//var jsonParser = bodyParser.json();
-//var urlencodedParser = bodyParser.urlencoded({extended:false});
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({extended:false});
 
 //
 //var myinfo = require('./my_modules/info.js');
@@ -34,10 +34,10 @@ app.engine('hbs',handlebars({
   partialsDir:__dirname + '/views/partials/'
 }));
 
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
 //Serves static files (we need this to import a css file)
 app.use(express.static('public'));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
 
 //remember to read about async
 async function getQuote(){
@@ -59,12 +59,7 @@ app.get('/', (req, res) =>{
     res.render('main',{layout : 'index',quote});
   });
 });
-app.post('/login',(req, res) =>{
-  //serves the body of page or mainhandlebars to container aka indexhandlebars
-  var str = input.get_full(req.body.name);
-  console.log(str);
-    res.render('planB',{layout:'index'});
-});
+
 
 
 //Route
@@ -73,12 +68,10 @@ app.get('/login', (req, res) =>{
 
   res.render('planB',{layout : 'index'});
 });
-
-app.post('/test', (req, res) =>{
-  //serves the body of page or mainhandlebars to container aka indexhandlebars
-  res.render('planB',{layout : 'index'});
+app.post('/login',(req, res) =>{
+    var getWelcome = req.body.fname;
+    res.render('planB',{layout: 'index',getWelcome});
 });
-
 
 
 
