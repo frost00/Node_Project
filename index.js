@@ -69,8 +69,13 @@ app.get('/login', (req, res) =>{
   res.render('planB',{layout : 'index'});
 });
 app.post('/login',(req, res) =>{
-    var getWelcome = req.body.fname;
+    var getWelcome = ", "+ req.body.fname;
     res.render('planB',{layout: 'index',getWelcome});
+});
+
+//Route
+app.get('/build', (req,res)=>{
+  res.render('partials/partial2',{layout: 'index'});
 });
 
 
